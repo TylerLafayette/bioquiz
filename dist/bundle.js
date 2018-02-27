@@ -1819,7 +1819,7 @@ module.exports = focusNode;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__StaticRouter__ = __webpack_require__(73);
 /* unused harmony reexport StaticRouter */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Switch__ = __webpack_require__(75);
-/* unused harmony reexport Switch */
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_10__Switch__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__matchPath__ = __webpack_require__(77);
 /* unused harmony reexport matchPath */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__withRouter__ = __webpack_require__(78);
@@ -19790,6 +19790,8 @@ module.exports = camelize;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_router_dom__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__views_Start_jsx__ = __webpack_require__(81);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__views_Name_jsx__ = __webpack_require__(86);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__views_QuizQuestion_jsx__ = __webpack_require__(87);
+
 
 
 
@@ -19801,8 +19803,13 @@ class Routes extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
         return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             __WEBPACK_IMPORTED_MODULE_1_react_router_dom__["a" /* BrowserRouter */],
             null,
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Route */], { exact: true, path: "/", component: __WEBPACK_IMPORTED_MODULE_2__views_Start_jsx__["a" /* default */] }),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Route */], { exact: true, path: "/name", component: __WEBPACK_IMPORTED_MODULE_3__views_Name_jsx__["a" /* default */] })
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_1_react_router_dom__["c" /* Switch */],
+                null,
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Route */], { exact: true, path: "/", component: __WEBPACK_IMPORTED_MODULE_2__views_Start_jsx__["a" /* default */] }),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Route */], { exact: true, path: "/name", component: __WEBPACK_IMPORTED_MODULE_3__views_Name_jsx__["a" /* default */] }),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Route */], { exact: true, path: "/quiz/:question", component: __WEBPACK_IMPORTED_MODULE_4__views_QuizQuestion_jsx__["a" /* default */] })
+            )
         );
     }
 }
@@ -23220,7 +23227,7 @@ StaticRouter.childContextTypes = {
 // Written in this round about way for babel-transform-imports
 
 
-/* unused harmony default export */ var _unused_webpack_default_export = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_Switch__["a" /* default */]);
+/* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_Switch__["a" /* default */]);
 
 /***/ }),
 /* 76 */
@@ -24153,24 +24160,29 @@ function isUndefined(arg) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__elements_TextInput_jsx__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__elements_LargeButton_jsx__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__layouts_Center_jsx__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__dispatcher_js__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__stores_Store_js__ = __webpack_require__(84);
 
 
 
 
 
 
-class Start extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
+
+
+class Name extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
     constructor() {
         super();
         this.state = {
-            codeVal: ""
+            nameVal: ""
         };
     }
     onCodeChange(e) {
-        this.setState({ codeVal: e.target.value });
+        this.setState({ nameVal: e.target.value });
     }
     nextClick() {
-        console.log("Clicked");
+        __WEBPACK_IMPORTED_MODULE_5__dispatcher_js__["a" /* default */].dispatch({ type: "UPDATE_NAME", data: this.state.nameVal });
+        this.props.history.push("/quiz");
     }
     render() {
         return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -24206,7 +24218,85 @@ class Start extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
         );
     }
 }
-/* harmony export (immutable) */ __webpack_exports__["a"] = Start;
+/* harmony export (immutable) */ __webpack_exports__["a"] = Name;
+
+
+/***/ }),
+/* 87 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__elements_Title_jsx__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__elements_TextInput_jsx__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__elements_LargeButton_jsx__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__layouts_Center_jsx__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__dispatcher_js__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__stores_Store_js__ = __webpack_require__(84);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_react_router_dom__ = __webpack_require__(27);
+
+
+
+
+
+
+
+
+
+class QuizQuestion extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
+    constructor() {
+        super();
+        this.state = {
+            codeVal: ""
+        };
+    }
+    onCodeChange(e) {
+        this.setState({ codeVal: e.target.value });
+    }
+    nextClick() {
+        __WEBPACK_IMPORTED_MODULE_5__dispatcher_js__["a" /* default */].dispatch({ type: "UPDATE_CODE", data: this.state.codeVal });
+        this.props.history.push("/name");
+    }
+    render() {
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "div",
+            { className: "fullscreen-wrapper" },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_4__layouts_Center_jsx__["a" /* default */],
+                null,
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    __WEBPACK_IMPORTED_MODULE_1__elements_Title_jsx__["a" /* default */],
+                    null,
+                    "1/4"
+                )
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_4__layouts_Center_jsx__["a" /* default */],
+                {
+                    marginTop: "50px" },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__elements_TextInput_jsx__["a" /* default */], {
+                    placeholder: "123456",
+                    onChange: this.onCodeChange.bind(this)
+                })
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_4__layouts_Center_jsx__["a" /* default */],
+                {
+                    marginTop: "50px"
+                },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    __WEBPACK_IMPORTED_MODULE_3__elements_LargeButton_jsx__["a" /* default */],
+                    {
+                        onClick: this.nextClick.bind(this)
+                    },
+                    "NEXT"
+                )
+            )
+        );
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = QuizQuestion;
 
 
 /***/ })

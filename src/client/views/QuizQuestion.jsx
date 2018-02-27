@@ -5,29 +5,32 @@ import LargeButton from "../elements/LargeButton.jsx"
 import Center from "../layouts/Center.jsx"
 import dispatcher from "../dispatcher.js"
 import Store from "../stores/Store.js"
+import { withRouter } from "react-router-dom"
 
-export default class Name extends Component {
+export default class QuizQuestion extends Component {
     constructor() {
         super()
         this.state = {
-            nameVal: ""
+            codeVal: ""
         }
     }
     onCodeChange(e) {
-        this.setState({ nameVal: e.target.value })
+        this.setState({ codeVal: e.target.value })
     }
     nextClick() {
-        dispatcher.dispatch({ type: "UPDATE_NAME", data: this.state.nameVal })
-        this.props.history.push("/quiz")
+        dispatcher.dispatch({ type: "UPDATE_CODE", data: this.state.codeVal })
+        this.props.history.push("/name")
     }
     render() {
         return (
             <div className="fullscreen-wrapper">
-                <Title>Choose a name.</Title>
+                <Center>
+                    <Title>1/4</Title>
+                </Center>
                 <Center
                     marginTop="50px">
                     <TextInput
-                        placeholder="nickname"
+                        placeholder="123456"
                         onChange={this.onCodeChange.bind(this)}
                         />
                 </Center>
@@ -36,7 +39,7 @@ export default class Name extends Component {
                     >
                     <LargeButton
                         onClick={this.nextClick.bind(this)}
-                        >GO</LargeButton>
+                        >NEXT</LargeButton>
                 </Center>
             </div>
         )
