@@ -24,13 +24,11 @@ export default class Start extends Component {
     render() {
         return (
             <div className="fullscreen-wrapper">
-                <Title>Please enter a code.</Title>
-                <Center
-                    marginTop="50px">
-                    <TextInput
-                        placeholder="123456"
-                        onChange={this.onCodeChange.bind(this)}
-                        />
+                <Title style={{fontSize: "48px"}}>Welcome!</Title>
+                <Center marginTop="100px">
+                    <Title
+                        style={{fontSize: "18px", fontWeight: 500}}
+                    >This game will display a question. You must try to answer accurately as fast as possible. The longer it takes to answer a question, the less points you get! If you answer incorrectly, you get no points.</Title>
                 </Center>
                 <Center
                     marginTop="50px"

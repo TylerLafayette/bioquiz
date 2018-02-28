@@ -7,6 +7,7 @@ export default class Center extends Component {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
+                textAlign: "center",
                 marginTop: this.props.marginTop || "0px"
             }}>
                 {this.props.children}

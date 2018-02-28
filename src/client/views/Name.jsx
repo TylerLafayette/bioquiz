@@ -18,7 +18,7 @@ export default class Name extends Component {
     }
     nextClick() {
         dispatcher.dispatch({ type: "UPDATE_NAME", data: this.state.nameVal })
-        this.props.history.push("/quiz")
+        this.props.history.push("/quiz/1")
     }
     render() {
         return (
